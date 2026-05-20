@@ -3,9 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NGC Shop ✿</title>
+<title>PERIODT</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'Socafe';
+  src: url('assets/Socafe.woff2') format('woff2'),
+       url('assets/Socafe.woff') format('woff'),
+       url('assets/Socafe.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --cream:   #FAF7F2;
   --offwhite:#FFFFFF;
@@ -20,6 +29,9 @@
   --sky:     #B0CCDF;
   --green-dark: #2e7d4f;
   --mint:    #9ecfb5;
+  /* Figma gradient colors */
+  --figma-pink-dark: #E4568B;
+  --figma-pink-light: #F8ABC8;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,19 +101,19 @@ header {
   text-decoration: none;
   color: var(--ink);
 }
+
 .logo-mark {
-  width: 38px; height: 38px;
-  background: var(--ink);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; color: var(--cream);
+  height: 130px;
+  width: 100px;
   flex-shrink: 0;
-  transition: background 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  display: block;
 }
+
 .header-logo:hover .logo-mark {
-  background: var(--green-dark);
   transform: rotate(15deg) scale(1.08);
 }
+
 .logo-text {
   font-family: 'Instrument Serif', serif;
   font-size: 21px;
@@ -207,14 +219,29 @@ nav a.nav-highlight:hover {
   gap: 8px;
 }
 .eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-dark); }
+
+/* Hero title with logo image */
 .shop-title {
-  font-family: 'Instrument Serif', serif;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* SOCAFE GRADIENT TITLE */
+.shop-title-text {
+  font-family: 'Socafe', 'Instrument Serif', serif;
   font-size: clamp(52px, 6vw, 88px);
   font-weight: 400;
   line-height: 1.0;
-  letter-spacing: -2px;
+  letter-spacing: -0.1em;
+  background: linear-gradient(135deg, var(--figma-pink-dark) 0%, var(--figma-pink-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
-.shop-title em { font-style: italic; color: var(--green-dark); }
+
 .shop-hero-right { text-align: right; flex-shrink: 0; }
 .shop-desc {
   font-size: 15px;
@@ -354,7 +381,7 @@ nav a.nav-highlight:hover {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
 }
 
@@ -832,7 +859,6 @@ nav a.nav-highlight:hover {
 .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--peach); animation: pulse 1.6s ease-in-out infinite; }
 
 /* ABOUT SECTION */
-
 .about-section {
   background: var(--offwhite);
   padding: 100px 80px 80px;
@@ -840,7 +866,6 @@ nav a.nav-highlight:hover {
   position: relative;
   overflow: hidden;
 }
-
 .about-inner {
   display: grid;
   grid-template-columns: 1fr 1.1fr 1fr;
@@ -849,8 +874,6 @@ nav a.nav-highlight:hover {
   max-width: 1300px;
   margin: 0 auto;
 }
-
-/* LEFT: photo collage */
 .about-photos {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -866,9 +889,7 @@ nav a.nav-highlight:hover {
   background: var(--sage);
   border: 1px solid var(--border);
 }
-.about-photo-main img {
-  width: 100%; height: 100%; object-fit: cover;
-}
+.about-photo-main img { width: 100%; height: 100%; object-fit: cover; }
 .about-photo-sm {
   border-radius: 12px;
   overflow: hidden;
@@ -876,9 +897,7 @@ nav a.nav-highlight:hover {
   background: var(--blush);
   border: 1px solid var(--border);
 }
-.about-photo-sm img {
-  width: 100%; height: 100%; object-fit: cover;
-}
+.about-photo-sm img { width: 100%; height: 100%; object-fit: cover; }
 .about-photo-wide {
   grid-column: 2;
   border-radius: 12px;
@@ -887,21 +906,13 @@ nav a.nav-highlight:hover {
   background: var(--butter);
   border: 1px solid var(--border);
 }
-.about-photo-wide img {
-  width: 100%; height: 100%; object-fit: cover;
-}
-
-/* Emoji for photo placeholders */
+.about-photo-wide img { width: 100%; height: 100%; object-fit: cover; }
 .photo-emoji {
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-size: 48px;
 }
-
-/* MIDDLE: text */
-.about-text {
-  padding: 8px 0;
-}
+.about-text { padding: 8px 0; }
 .about-label {
   font-size: 11px;
   font-weight: 700;
@@ -913,11 +924,7 @@ nav a.nav-highlight:hover {
   align-items: center;
   gap: 8px;
 }
-.about-label::before {
-  content: '';
-  width: 20px; height: 1.5px;
-  background: var(--green-dark);
-}
+.about-label::before { content: ''; width: 20px; height: 1.5px; background: var(--green-dark); }
 .about-title {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(36px, 3.5vw, 52px);
@@ -936,12 +943,7 @@ nav a.nav-highlight:hover {
   margin-bottom: 28px;
   font-family: 'DM Sans', sans-serif;
 }
-.about-body {
-  font-size: 14px;
-  color: rgba(26,24,20,0.65);
-  line-height: 1.85;
-  margin-bottom: 18px;
-}
+.about-body { font-size: 14px; color: rgba(26,24,20,0.65); line-height: 1.85; margin-bottom: 18px; }
 .about-body + .about-body { margin-top: 0; }
 .about-sign {
   font-family: 'Caveat', cursive;
@@ -951,8 +953,6 @@ nav a.nav-highlight:hover {
   line-height: 1.5;
   font-weight: 600;
 }
-
-/* RIGHT: hover reveal image */
 .about-right {
   display: flex;
   flex-direction: column;
@@ -960,8 +960,6 @@ nav a.nav-highlight:hover {
   gap: 48px;
   padding-top: 8px;
 }
-
-/* Hover reveal image card */
 .about-hover-card {
   position: relative;
   width: 100%;
@@ -972,8 +970,6 @@ nav a.nav-highlight:hover {
   background: var(--cream);
   border: 1px solid var(--border);
 }
-
-/* Default state: show a soft placeholder */
 .about-hover-bg {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, #fde8ef 0%, #f5c8d5 60%, #e8f2e8 100%);
@@ -984,8 +980,6 @@ nav a.nav-highlight:hover {
   transition: opacity 0.4s ease;
   z-index: 1;
 }
-
-/* The "thank you" image that appears on hover */
 .about-hover-img {
   position: absolute; inset: 0;
   z-index: 2;
@@ -999,13 +993,9 @@ nav a.nav-highlight:hover {
   transform: scale(1.06);
   transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-
-/* Hover state */
 .about-hover-card:hover .about-hover-bg { opacity: 0; }
 .about-hover-card:hover .about-hover-img { opacity: 1; }
 .about-hover-card:hover .about-hover-img img { transform: scale(1); }
-
-/* Tooltip hint */
 .about-hover-hint {
   position: absolute;
   bottom: 16px; left: 50%;
@@ -1023,8 +1013,6 @@ nav a.nav-highlight:hover {
   transition: opacity 0.3s;
 }
 .about-hover-card:hover .about-hover-hint { opacity: 0; }
-
-/* SOCIAL ICONS */
 .about-social {
   width: 100%;
   display: flex;
@@ -1039,13 +1027,7 @@ nav a.nav-highlight:hover {
   text-transform: uppercase;
   color: var(--muted);
 }
-.social-icons {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-/* Each icon button */
+.social-icons { display: flex; gap: 14px; align-items: center; }
 .si-btn {
   width: 48px; height: 48px;
   border-radius: 50%;
@@ -1057,36 +1039,21 @@ nav a.nav-highlight:hover {
   text-decoration: none;
   position: relative;
   transition: transform 0.2s;
-  /* Pulse animation */
   animation: si-pulse 3s ease-in-out infinite;
 }
-/* Stagger delays so they don't pulse in sync */
 .si-btn:nth-child(1) { animation-delay: 0s; }
 .si-btn:nth-child(2) { animation-delay: 0.5s; }
 .si-btn:nth-child(3) { animation-delay: 1s; }
 .si-btn:nth-child(4) { animation-delay: 1.5s; }
 .si-btn:nth-child(5) { animation-delay: 2s; }
-
-@keyframes si-pulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.12); }
-}
-
-.si-btn:hover {
-  animation: none; /* stop pulse on hover */
-  transform: scale(1.2) translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-}
-
+@keyframes si-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+.si-btn:hover { animation: none; transform: scale(1.2) translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
 .si-ig   { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .si-wa   { background: #25D366; }
 .si-yt   { background: #FF0000; }
 .si-tt   { background: #010101; }
 .si-li   { background: #0077B5; }
-
 .si-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
-
-/* ── ABOUT FOOTER BAR ── */
 .about-footer-bar {
   margin-top: 80px;
   padding-top: 36px;
@@ -1100,16 +1067,8 @@ nav a.nav-highlight:hover {
   margin-left: auto;
   margin-right: auto;
 }
-.about-footer-brand {
-  font-family: 'Instrument Serif', serif;
-  font-size: 20px;
-  font-style: italic;
-  color: var(--ink);
-}
-.about-footer-copy {
-  font-size: 12px;
-  color: var(--muted);
-}
+.about-footer-brand { font-family: 'Instrument Serif', serif; font-size: 20px; font-style: italic; color: var(--ink); }
+.about-footer-copy { font-size: 12px; color: var(--muted); }
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -1152,10 +1111,10 @@ nav a.nav-highlight:hover {
   .about-photos { max-width: 400px; }
   .about-hover-card { max-width: 320px; margin: 0 auto; }
   .about-footer-bar { flex-direction: column; text-align: center; }
+  .shop-title-text { font-size: 52px; }
 }
 @media (max-width: 520px) {
   .product-grid { grid-template-columns: 1fr; gap: 16px; }
-  .shop-title { font-size: 52px; }
 }
 
 /* ANIMATIONS */
@@ -1168,12 +1127,12 @@ nav a.nav-highlight:hover {
 <!-- TOP MARQUEE BAR -->
 <div class="marquee-top">
   <div class="marquee-top-inner" id="marqueeTop">
-    <span class="marquee-top-item"><span class="dot"></span> ngc shop ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> PERIODT</span>
     <span class="marquee-top-item"><span class="dot"></span> Custom merch open for order</span>
     <span class="marquee-top-item"><span class="dot"></span> Tote bag · Hoodie · Tumbler · Sticker</span>
     <span class="marquee-top-item"><span class="dot"></span> WhatsApp us to start yours</span>
     <span class="marquee-top-item"><span class="dot"></span> Handmade with love ✿</span>
-    <span class="marquee-top-item"><span class="dot"></span> ngc shop ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> PERIODT</span>
     <span class="marquee-top-item"><span class="dot"></span> Custom merch open for order</span>
     <span class="marquee-top-item"><span class="dot"></span> Tote bag · Hoodie · Tumbler · Sticker</span>
     <span class="marquee-top-item"><span class="dot"></span> WhatsApp us to start yours</span>
@@ -1184,14 +1143,13 @@ nav a.nav-highlight:hover {
 <!-- HEADER -->
 <header>
   <a href="index.html" class="header-logo">
-    <div class="logo-mark">✿</div>
-    <span class="logo-text">ngc <em>shop</em></span>
-  </a>
+  <img src="assets/logo design.png" alt="design" class="logo-mark">
+</a>
   <nav>
     <a href="#products">Shop</a>
     <a href="personal-work.html">Custom</a>
     <a href="#showcase">Our Work</a>
-    <a href="#">Instagram</a>
+    <a href="https://www.instagram.com/owletishere/">Instagram</a>
     <a href="#video" class="nav-highlight">Our Journey</a>
   </nav>
   <div class="header-right">
@@ -1205,13 +1163,15 @@ nav a.nav-highlight:hover {
 <section class="shop-hero">
   <div class="shop-hero-left fade-up">
     <p class="shop-eyebrow"><span class="eyebrow-dot"></span> Handmade · Jakarta · Made to Order</p>
-    <h1 class="shop-title"> Shop NGC<br><em>Merch</em></h1>
+    <div class="shop-title">
+      <div class="shop-title-text">PERIODT</div>
+    </div>
   </div>
   <div class="shop-hero-right fade-up" style="transition-delay:0.12s">
     <p class="shop-desc">Custom merchandise, printed accessories & handmade goods. Each piece crafted with care, designed to carry your vibe everywhere you go.</p>
     <div class="shop-stats">
-      <div class="stat"><span class="stat-n">500+</span><span class="stat-l">Items Sold</span></div>
-      <div class="stat"><span class="stat-n">100+</span><span class="stat-l">Customers</span></div>
+      <div class="stat"><span class="stat-n">500</span><span class="stat-l">Items Sold</span></div>
+      <div class="stat"><span class="stat-n">100</span><span class="stat-l">Customers</span></div>
       <div class="stat"><span class="stat-n"> 5 </span><span class="stat-l">Avg Rating</span></div>
     </div>
   </div>
@@ -1225,7 +1185,7 @@ nav a.nav-highlight:hover {
     <button class="pill" data-filter="tumbler">Tumbler</button>
     <button class="pill" data-filter="sticker">Sticker</button>
     <button class="pill" data-filter="keychain">Keychain</button>
-    <button class="pill" data-filter="notebook">Notebook</button>
+    <button class="pill" data-filter="pin">PIN</button>
     <button class="pill" data-filter="custom">Custom</button>
   </div>
   <div class="filter-right">
@@ -1247,7 +1207,7 @@ nav a.nav-highlight:hover {
     <div class="product-card fade-up" data-category="tote-bag">
       <div class="card-img c-blush" style="display:flex;align-items:center;justify-content:center;">
         <span class="card-badge badge-new">New</span>
-        <img src="assets/Bag.jpg" alt="Totebag">
+        <img src="assets/TOTE.png" alt="Totebag">
         <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
       </div>
       <div class="card-body">
@@ -1255,7 +1215,7 @@ nav a.nav-highlight:hover {
         <h3 class="card-name">Canvas Tote Aesthetic</h3>
         <p class="card-desc">A premium canvas tote bag in a beautiful brown color. Durable, stylish, and eco-friendly. Perfect for daily use.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 85.000</span>
+          <span class="card-price">Rp 30.000</span>
           <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
         </div>
       </div>
@@ -1264,7 +1224,7 @@ nav a.nav-highlight:hover {
     <div class="product-card fade-up" data-category="sticker" style="transition-delay:0.06s">
       <div class="card-img c-sage" style="display:flex;align-items:center;justify-content:center;">
         <span class="card-badge badge-bs">Bestseller</span>
-        <img src="assets/stickers.jpg" alt="Custom Stickers">
+        <img src="assets/STIKER.png" alt="Custom Stickers">
         <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
       </div>
       <div class="card-body">
@@ -1272,7 +1232,7 @@ nav a.nav-highlight:hover {
         <h3 class="card-name">Custom Stickers</h3>
         <p class="card-desc">Custom stickers made just for you! High-quality print, vibrant colors, and durable material. Waterproof, long-lasting, and fully customizable.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 185.000</span>
+          <span class="card-price">Rp 10.000</span>
           <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
         </div>
       </div>
@@ -1280,7 +1240,7 @@ nav a.nav-highlight:hover {
 
     <div class="product-card fade-up" data-category="tumbler" style="transition-delay:0.12s">
       <div class="card-img c-sky" style="display:flex;align-items:center;justify-content:center;">
-        <img src="assets/tumbler.jpg" alt="Tumbler">
+        <img src="assets/TUMBLER.png" alt="Tumbler">
         <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
       </div>
       <div class="card-body">
@@ -1288,7 +1248,7 @@ nav a.nav-highlight:hover {
         <h3 class="card-name">Tumbler Custom Print</h3>
         <p class="card-desc">Premium custom tumbler designed for your daily needs. Made with high-quality materials, durable, and easy to carry.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 120.000</span>
+          <span class="card-price">Rp 100.000</span>
           <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
         </div>
       </div>
@@ -1297,7 +1257,7 @@ nav a.nav-highlight:hover {
     <div class="product-card sold-out fade-up" data-category="keychain" style="transition-delay:0.18s">
       <div class="card-img c-lavender" style="display:flex;align-items:center;justify-content:center;">
         <span class="card-badge badge-sold">Sold Out</span>
-        <img src="assets/keychain.jpg" alt="Keychain">
+        <img src="assets/KEYCHAIN.png" alt="Keychain">
         <div class="card-overlay"><button class="quick-btn">Sold Out</button></div>
       </div>
       <div class="card-body">
@@ -1305,23 +1265,23 @@ nav a.nav-highlight:hover {
         <h3 class="card-name">Cute Keychains</h3>
         <p class="card-desc">Adorable keychains with charming details and vibrant colors, perfect for your keys, bags, or anywhere you want a touch of fun.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 35.000</span>
+          <span class="card-price">Rp 18.000</span>
           <span class="card-action disabled">Sold Out</span>
         </div>
       </div>
     </div>
 
-    <div class="product-card fade-up" data-category="pouch">
+    <div class="product-card fade-up" data-category="pin">
       <div class="card-img c-butter" style="display:flex;align-items:center;justify-content:center;">
-        <img src="assets/pouch.jpg" alt="Pouch">
+        <img src="assets/PIN.png" alt="PIN">
         <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
       </div>
       <div class="card-body">
-        <p class="card-cat">Pouch</p>
-        <h3 class="card-name">Pouch</h3>
-        <p class="card-desc">Premium custom pouch for organizing cosmetics, stationery, or daily items while keeping everything stylish and neat.</p>
+        <p class="card-cat">PIN</p>
+        <h3 class="card-name">PIN</h3>
+        <p class="card-desc">Designed with premium quality materials and eye catching details, these pins are perfect for bags, jackets, pouches, or everyday accessories. Small in size but full of personality, each pin adds a unique touch to your look and makes every outfit stand out. Perfect for collecting, gifting, or showing off your favorite aesthetic.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 40.000</span>
+          <span class="card-price">Rp 10.000</span>
           <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
         </div>
       </div>
@@ -1329,7 +1289,7 @@ nav a.nav-highlight:hover {
 
     <div class="product-card fade-up" data-category="custom" style="transition-delay:0.06s">
       <div class="card-img c-peach" style="display:flex;align-items:center;justify-content:center;">
-        <img src="assets/t-shirt.jpg" alt="T-Shirt">
+        <img src="assets/T-SHIRT.png" alt="T-Shirt">
         <div class="card-overlay"><button class="quick-btn">Start Custom →</button></div>
       </div>
       <div class="card-body">
@@ -1337,51 +1297,15 @@ nav a.nav-highlight:hover {
         <h3 class="card-name">Customize Tee</h3>
         <p class="card-desc">Premium custom t-shirt made with high quality fabric. Designed with durable prints and a modern fit, perfect for everyday style.</p>
         <div class="card-footer">
-          <span class="card-price">Rp 50.000</span>
+          <span class="card-price">Rp 35.000</span>
           <a href="https://wa.me/6281292526073" class="card-action"> Customize </a>
         </div>
       </div>
     </div>
 
-    <div class="product-card sold-out fade-up" data-category="notebook" style="transition-delay:0.12s">
-      <div class="card-img c-mint" style="display:flex;align-items:center;justify-content:center;">
-        <span class="card-badge badge-sold">Sold Out</span>
-        <img src="assets/notebook.jpg" alt="Notebook">
-        <div class="card-overlay"><button class="quick-btn">Sold Out</button></div>
-      </div>
-      <div class="card-body">
-        <p class="card-cat">Notebook</p>
-        <h3 class="card-name">Custom Softcover Journal</h3>
-        <p class="card-desc">Stay organized and inspired with our premium notebook. Smooth pages and a stylish cover, perfect for school, work, or personal use.</p>
-        <div class="card-footer">
-          <span class="card-price">Rp 20.000</span>
-          <span class="card-action disabled">Sold Out</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="product-card fade-up" data-category="custom" style="transition-delay:0.18s">
-      <div class="card-img c-rose" style="display:flex;align-items:center;justify-content:center;">
-        <span class="card-badge badge-limited">Limited</span>
-        <img src="assets/gift-set.jpg" alt="Gift Set">
-        <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
-      </div>
-      <div class="card-body">
-        <p class="card-cat">Gift Set</p>
-        <h3 class="card-name">NGC Merch Bundle</h3>
-        <p class="card-desc">Curated gift set with premium quality products and aesthetic packaging. Perfect for birthdays, celebrations, or thoughtful surprises.</p>
-        <div class="card-footer">
-          <span class="card-price">Rp 250.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <div id="grid-categories" class="hidden-view">
-    <!-- Category sections (same content as original, omitted for brevity) -->
-  </div>
+  <div id="grid-categories" class="hidden-view"></div>
 
 </section>
 
@@ -1495,43 +1419,28 @@ nav a.nav-highlight:hover {
 <!-- FOOTER -->
 <footer style="background: var(--cream); border-top: 1px solid var(--border); padding: 60px 80px 48px;">
 
-  <!-- Social Section -->
   <div style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:60px;">
     <p style="font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted);">Let's connect!</p>
     <div style="display:flex; gap:14px; align-items:center;">
 
-      <!-- YouTube -->
-      <a href="#" title="YouTube" aria-label="YouTube" class="si-btn si-yt">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
-      </a>
-
-      <!-- Instagram -->
-      <a href="#" title="Instagram" aria-label="Instagram" class="si-btn si-ig">
+      <a href="https://www.instagram.com/owletishere/" title="Instagram" aria-label="Instagram" class="si-btn si-ig">
         <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       </a>
 
-      <!-- TikTok -->
-      <a href="#" title="TikTok" aria-label="TikTok" class="si-btn si-tt">
+      <a href="https://www.tiktok.com/@periodt7210" title="TikTok" aria-label="TikTok" class="si-btn si-tt">
         <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.85a8.16 8.16 0 004.77 1.52V6.89a4.85 4.85 0 01-1-.2z"/></svg>
       </a>
 
-      <!-- WhatsApp -->
       <a href="https://wa.me/6281292526073" target="_blank" title="WhatsApp" aria-label="WhatsApp" class="si-btn si-wa">
         <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.486 2 2 6.486 2 12c0 1.96.57 3.786 1.55 5.33L2 22l4.82-1.51A9.953 9.953 0 0012 22c5.514 0 10-4.486 10-10S17.514 2 12 2zm5.12 13.66c-.22.61-.64 1.12-1.17 1.35-.38.17-.88.3-2.57-.55-1.69-.85-2.79-2.49-2.88-2.61-.09-.12-.72-.96-.72-1.83 0-.87.46-1.3.63-1.48.17-.18.38-.22.5-.22h.35c.16 0 .33.01.47.36.18.43.6 1.47.65 1.58.05.1.09.23.02.37-.07.14-.1.23-.2.35-.1.12-.2.27-.29.36-.1.1-.2.2-.09.38.11.18.5.81 1.08 1.31.74.66 1.37.86 1.57.96.19.1.31.08.42-.05.12-.13.48-.57.6-.76.12-.19.24-.16.41-.1.17.06 1.07.51 1.25.6.18.09.31.14.35.21.05.07.05.43-.17 1.04z"/></svg>
-      </a>
-
-      <!-- LinkedIn -->
-      <a href="#" title="LinkedIn" aria-label="LinkedIn" class="si-btn si-li">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
 
     </div>
   </div>
 
-  <!-- Footer bar -->
   <div style="padding-top:36px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; max-width:1300px; margin:0 auto;">
-    <span style="font-family:'Instrument Serif',serif; font-size:20px; font-style:italic; color:var(--ink);">ngc shop ✿</span>
-    <span style="font-size:12px; color:var(--muted);">© 2025 ngc shop · Handmade merchandise dari Jakarta · Made with love</span>
+    <img src="assets/logoo.png" alt="periodt" style="height:220px; width:auto; object-fit:contain;">
+    <span style="font-size:12px; color:var(--muted);">© 2026 PERIODT · Handmade merchandise dari Jakarta · Made with love</span>
     <div style="display:inline-flex; align-items:center; gap:7px; background:rgba(46,125,79,0.08); border:1px solid rgba(46,125,79,0.15); padding:7px 16px; border-radius:100px; font-size:11px; color:var(--green-dark); font-weight:600;">
       <span style="width:6px; height:6px; border-radius:50%; background:var(--green-dark); animation:pulse 2s ease-in-out infinite; display:inline-block;"></span>
       Open for orders
@@ -1558,11 +1467,18 @@ nav a.nav-highlight:hover {
   }
 
   function showAll() {
-    gridAll.classList.remove('hidden-view');
-    if (gridCats) gridCats.classList.add('hidden-view');
-    const total = gridAll.querySelectorAll('.product-card').length;
-    gridLabel.textContent = total + ' products';
-  }
+  gridAll.classList.remove('hidden-view');
+  if (gridCats) gridCats.classList.add('hidden-view');
+  const cards = gridAll.querySelectorAll('.product-card');
+  cards.forEach((card, i) => {
+    card.style.display = '';
+    card.style.animationDelay = (i * 0.06) + 's';
+    card.classList.remove('filtered-in');
+    void card.offsetWidth;
+    card.classList.add('filtered-in');
+  });
+  gridLabel.textContent = cards.length + ' products';
+}
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -1574,12 +1490,11 @@ nav a.nav-highlight:hover {
         const rect = productsSection.getBoundingClientRect();
         if (rect.top < -80 || rect.top > window.innerHeight) scrollToProducts();
       } else {
-        // filter cards in grid-all
         gridAll.classList.remove('hidden-view');
         if (gridCats) gridCats.classList.add('hidden-view');
         const cards = gridAll.querySelectorAll('.product-card');
         let count = 0;
-        cards.forEach((card, i) => {
+        cards.forEach((card) => {
           const cat = card.getAttribute('data-category');
           if (cat === f) {
             card.style.display = '';
@@ -1607,7 +1522,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// VIDEO PLAYER 
+// VIDEO PLAYER
 (function(){
   const video       = document.getElementById('shopVideo');
   const overlay     = document.getElementById('videoOverlay');
@@ -1658,7 +1573,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   });
 })();
 
-// CUSTOM HEART CURSOR 
+// CUSTOM HEART CURSOR
 (function(){
   const cursor = document.createElement('div');
   cursor.id = 'custom-cursor';
