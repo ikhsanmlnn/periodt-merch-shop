@@ -13,6 +13,7 @@
   --muted:      #8C8880;
   --border:     #E8E3DA;
   --green:      #2e7d4f;
+  --green-dark: #2e7d4f;
   --green-light:#e8f2e8;
   --peach:      #F2A58E;
   --blush:      #F5C8D5;
@@ -22,6 +23,9 @@
   --sky:        #B0CCDF;
   --paper:      #f4ede0;
   --paper-dark: #e8d9c0;
+  --figma-pink-dark:  #E4568B;
+  --figma-pink-light: #F8ABC8;
+  --mint:       #9ecfb5;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,10 +39,49 @@ body {
   overflow-x: hidden;
 }
 
+/* TOP MARQUEE BAR */
+.marquee-top {
+  background: var(--butter);
+  overflow: hidden;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  position: relative;
+  z-index: 300;
+}
+.marquee-top-inner {
+  display: inline-flex;
+  animation: mq-top 18s linear infinite;
+  white-space: nowrap;
+}
+.marquee-top:hover .marquee-top-inner { animation-play-state: paused; }
+.marquee-top-item {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 0 28px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.marquee-top-item .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  display: inline-block;
+  flex-shrink: 0;
+}
+@keyframes mq-top {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* HEADER */
 header {
-  background: var(--offwhite);
-  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid var(--blush);
   padding: 0 52px;
   display: flex;
   align-items: center;
@@ -80,17 +123,22 @@ nav a {
   border-radius: 100px; transition: all 0.2s;
 }
 nav a:hover { color: var(--ink); background: var(--cream); }
-nav a.active {
-  color: var(--green); background: rgba(46,125,79,0.08); font-weight: 600;
+nav a.active, nav a[aria-current="page"] {
+  color: var(--figma-pink-dark);
+  background: rgba(228,86,139,0.08);
+  font-weight: 600;
 }
 nav a.nav-highlight {
-  background: var(--ink); color: var(--cream) !important;
-  padding: 7px 18px; font-weight: 600; letter-spacing: 0.3px;
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white !important;
+  padding: 7px 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 14px rgba(228,86,139,0.3);
 }
 nav a.nav-highlight:hover {
-  background: var(--green);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(46,125,79,0.25);
+  box-shadow: 0 8px 22px rgba(228,86,139,0.4);
 }
 
 .header-right {
@@ -106,18 +154,26 @@ nav a.nav-highlight:hover {
 }
 .header-right .hbtn:hover { color: var(--ink); background: var(--cream); }
 .header-right .cart-icon {
-  background: var(--cream); border: 1.5px solid var(--border);
-  padding: 6px 14px; border-radius: 100px;
-  font-size: 13px; cursor: pointer;
+  position: relative;
+  background: #FFF0F5;
+  border: 1.5px solid var(--blush);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  cursor: pointer;
   display: flex; align-items: center; gap: 6px;
-  font-weight: 600; color: var(--ink); transition: all 0.2s;
+  font-weight: 600;
+  color: var(--figma-pink-dark);
+  transition: all 0.2s;
 }
 .header-right .cart-icon:hover {
-  border-color: var(--ink); background: var(--ink); color: var(--cream);
+  border-color: var(--figma-pink-dark);
+  background: var(--figma-pink-dark);
+  color: white;
 }
 .cart-count {
   font-size: 11px; font-weight: 700;
-  color: var(--green);
+  color: var(--figma-pink-dark);
 }
 
 /* HERO TITLE */
@@ -154,14 +210,26 @@ nav a.nav-highlight:hover {
 .scroll-hint {
   margin-top: 32px;
   font-family: 'Caveat', cursive;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--muted);
   display: flex; align-items: center; justify-content: center; gap: 8px;
   animation: hint-bob 2s ease-in-out infinite;
 }
+.scroll-arrow {
+  display: inline-block;
+  animation: arrow-wiggle 1.4s ease-in-out infinite;
+  color: var(--figma-pink-dark);
+  font-size: 18px;
+  letter-spacing: 2px;
+}
 @keyframes hint-bob {
   0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(5px); }
+  50%      { transform: translateY(6px); }
+}
+@keyframes arrow-wiggle {
+  0%,100% { transform: translateY(0) rotate(0deg) scale(1); }
+  25%      { transform: translateY(4px) rotate(-3deg) scale(1.1); }
+  75%      { transform: translateY(4px) rotate(3deg) scale(1.1); }
 }
 
 /* ── GALLERY: 3-column parallax ── */
@@ -643,6 +711,22 @@ nav a.nav-highlight:hover {
 </head>
 <body>
 
+<!-- TOP MARQUEE BAR -->
+<div class="marquee-top">
+  <div class="marquee-top-inner">
+    <span class="marquee-top-item"><span class="dot"></span> Personal Work by Periodt</span>
+    <span class="marquee-top-item"><span class="dot"></span> Handmade with love ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> Jakarta · Indonesia</span>
+    <span class="marquee-top-item"><span class="dot"></span> Custom Orders Open</span>
+    <span class="marquee-top-item"><span class="dot"></span> Made with passion 🌸</span>
+    <span class="marquee-top-item"><span class="dot"></span> Personal Work by Periodt</span>
+    <span class="marquee-top-item"><span class="dot"></span> Handmade with love ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> Jakarta · Indonesia</span>
+    <span class="marquee-top-item"><span class="dot"></span> Custom Orders Open</span>
+    <span class="marquee-top-item"><span class="dot"></span> Made with passion 🌸</span>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <a href="index.html" class="header-logo">
@@ -668,7 +752,7 @@ nav a.nav-highlight:hover {
   <p class="page-hero-eyebrow"><span></span> Periodt · Jakarta · Made with love <span></span></p>
   <h1 class="page-hero-title">Personal<br><em>Work</em></h1>
   <p class="page-hero-sub">a collection of things made with love ✿</p>
-  <div class="scroll-hint">scroll down ↓</div>
+  <div class="scroll-hint">scroll down <span class="scroll-arrow">✿↓✿</span></div>
 </section>
 
 <!-- GALLERY GRID — 3 kolom parallax -->
@@ -881,13 +965,13 @@ nav a.nav-highlight:hover {
     <!-- LEFT: Photo collage -->
     <div class="about-photos fade-up">
       <div class="about-photo-main">
-        <img src="assets/RAME.jpg" alt="Full" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>🛍️</div>'">
+        <img src="assets/hoodie.jpg" alt="Full" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>🛍️</div>'">
       </div>
       <div class="about-photo-sm">
         <img src="assets/stickers.jpg" alt="Stickers" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>✨</div>'">
       </div>
       <div class="about-photo-sm">
-        <img src="assets/gift-set.jpg" alt="Gift set" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>🎁</div>'">
+        <img src="assets/Bag-2.jpg" alt="Gift set" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>🎁</div>'">
       </div>
       <div class="about-photo-wide" style="grid-column:1; grid-row:3;">
         <img src="assets/t-shirt.jpg" alt="T-shirt" onerror="this.parentElement.innerHTML='<div class=\'photo-emoji\'>🎨</div>'">
@@ -1033,7 +1117,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     rafId = requestAnimationFrame(tick);
   }
 
-  // Start the loop immediately — runs every frame, no scroll event needed
+  // Start the loop immediately runs every frame, no scroll event needed
   // This gives butter-smooth motion both up and down
   rafId = requestAnimationFrame(tick);
 
@@ -1047,7 +1131,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   });
 })();
 
-// ── Archives Carousel ──
+// Archives Carousel
 (function() {
   const slides = [
     { cat: 'Making Of',         title: '*Hangout* refreshing after finishing our progress' },
@@ -1121,7 +1205,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   resetAuto();
 })();
 
-// ── Custom Heart Cursor ──
+// Custom Heart Cursor
 (function(){
   const cursor = document.createElement('div');
   cursor.id = 'custom-cursor';

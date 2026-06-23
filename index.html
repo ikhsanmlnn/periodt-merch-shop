@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -29,7 +30,6 @@
   --sky:     #B0CCDF;
   --green-dark: #2e7d4f;
   --mint:    #9ecfb5;
-  /* Figma gradient colors */
   --figma-pink-dark: #E4568B;
   --figma-pink-light: #F8ABC8;
 }
@@ -83,8 +83,9 @@ body {
 
 /* HEADER */
 header {
-  background: var(--offwhite);
-  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid var(--blush);
   padding: 0 52px;
   display: flex;
   align-items: center;
@@ -138,21 +139,21 @@ nav a {
 }
 nav a:hover { color: var(--ink); background: var(--cream); }
 nav a.active, nav a[aria-current="page"] {
-  color: var(--green-dark);
-  background: rgba(46,125,79,0.08);
+  color: var(--figma-pink-dark);
+  background: rgba(228,86,139,0.08);
   font-weight: 600;
 }
 nav a.nav-highlight {
-  background: var(--ink);
-  color: var(--cream) !important;
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white !important;
   padding: 7px 18px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.3px;
+  box-shadow: 0 4px 14px rgba(228,86,139,0.3);
 }
 nav a.nav-highlight:hover {
-  background: var(--green-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(46,125,79,0.25);
+  box-shadow: 0 8px 22px rgba(228,86,139,0.4);
 }
 
 .header-right {
@@ -176,27 +177,37 @@ nav a.nav-highlight:hover {
 .header-right .hbtn:hover { color: var(--ink); background: var(--cream); }
 .header-right .cart-icon {
   position: relative;
-  background: var(--cream);
-  border: 1.5px solid var(--border);
+  background: #FFF0F5;
+  border: 1.5px solid var(--blush);
   padding: 6px 14px;
   border-radius: 100px;
   font-size: 13px;
   cursor: pointer;
   display: flex; align-items: center; gap: 6px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--figma-pink-dark);
   transition: all 0.2s;
 }
 .header-right .cart-icon:hover {
-  border-color: var(--ink);
-  background: var(--ink);
-  color: var(--cream);
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white;
+  border-color: transparent;
 }
 .cart-count {
   font-size: 11px;
   font-weight: 700;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
 }
+.cart-icon:hover .cart-count { color: white; }
+
+/* HEADER DIVIDER */
+.header-divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--blush), var(--butter), var(--sage), var(--sky), var(--blush));
+  background-size: 200% 100%;
+  animation: divider-shift 5s linear infinite;
+}
+@keyframes divider-shift { 0%{background-position:0%} 100%{background-position:200%} }
 
 /* SHOP HERO */
 .shop-hero {
@@ -206,21 +217,45 @@ nav a.nav-highlight:hover {
   justify-content: space-between;
   gap: 40px;
   border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
 }
+
+.shop-hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: var(--blush);
+  opacity: 0.15;
+  pointer-events: none;
+}
+.shop-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: 28%;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: var(--sage);
+  opacity: 0.13;
+  pointer-events: none;
+}
+
 .shop-eyebrow {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-dark); }
+.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--figma-pink-dark); animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-/* Hero title with logo image */
 .shop-title {
   display: flex;
   align-items: center;
@@ -228,7 +263,6 @@ nav a.nav-highlight:hover {
   flex-wrap: wrap;
 }
 
-/* SOCAFE GRADIENT TITLE */
 .shop-title-text {
   font-family: 'Socafe', 'Instrument Serif', serif;
   font-size: clamp(52px, 6vw, 88px);
@@ -240,35 +274,96 @@ nav a.nav-highlight:hover {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  margin-bottom: 26px;
 }
 
-.shop-hero-right { text-align: right; flex-shrink: 0; }
+.shop-hero-sign {
+  font-family: 'Caveat', cursive;
+  font-size: 17px;
+  color: var(--figma-pink-dark);
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.shop-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+.hero-btn-p {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  box-shadow: 0 6px 20px rgba(228,86,139,0.3);
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hero-btn-p:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(228,86,139,0.4); }
+.hero-btn-s {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.hero-btn-s:hover { border-color: var(--figma-pink-dark); color: var(--figma-pink-dark); background: #FFF5F8; }
+
+.shop-hero-right { text-align: right; flex-shrink: 0; position: relative; z-index: 1; }
 .shop-desc {
   font-size: 15px;
   color: var(--muted);
   line-height: 1.75;
   max-width: 280px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   text-align: right;
 }
-.shop-stats { display: flex; gap: 32px; justify-content: flex-end; }
-.stat { text-align: center; }
-.stat-n {
-  font-family: 'Instrument Serif', serif;
-  font-size: 32px;
-  font-weight: 400;
-  display: block;
-  line-height: 1;
-}
-.stat-l {
-  font-size: 10px;
+
+.shop-tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 24px; }
+.shop-tag {
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
   color: var(--muted);
-  margin-top: 4px;
-  display: block;
+  background: var(--offwhite);
+  letter-spacing: 0.2px;
+  transition: all 0.2s;
+  cursor: default;
 }
+.shop-tag:hover { border-color: var(--figma-pink-light); color: var(--figma-pink-dark); background: #FFF5F8; }
+
+.shop-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(46,125,79,0.07);
+  border: 1px solid rgba(46,125,79,0.18);
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  color: var(--green-dark);
+  font-weight: 600;
+}
+.shop-open-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-dark); animation: blink 2s ease-in-out infinite; }
 
 /* FILTER BAR */
 .filter-bar {
@@ -281,7 +376,7 @@ nav a.nav-highlight:hover {
   gap: 20px;
   flex-wrap: wrap;
   position: sticky;
-  top: 72px;
+  top: 74px;
   z-index: 100;
 }
 .filter-pills { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -297,10 +392,12 @@ nav a.nav-highlight:hover {
   transition: all 0.2s;
   letter-spacing: 0.2px;
 }
-.pill:hover, .pill.active {
-  background: var(--ink);
-  color: var(--cream);
-  border-color: var(--ink);
+.pill:hover { background: #FFF0F5; color: var(--figma-pink-dark); border-color: var(--blush); }
+.pill.active {
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 3px 10px rgba(228,86,139,0.25);
 }
 .filter-right { display: flex; align-items: center; gap: 12px; }
 .sort-label { font-size: 12px; color: var(--muted); font-weight: 500; }
@@ -320,7 +417,9 @@ nav a.nav-highlight:hover {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238C8880' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
+  transition: border-color 0.2s;
 }
+.sort-select:focus { border-color: var(--figma-pink-light); }
 
 /* PRODUCT GRID */
 .shop-section { padding: 60px 80px 100px; }
@@ -337,47 +436,6 @@ nav a.nav-highlight:hover {
   gap: 12px;
 }
 .grid-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-.category-section { margin-bottom: 60px; }
-.category-section:last-child { margin-bottom: 0; }
-
-.category-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
-  border-bottom: 2px solid var(--border);
-}
-.category-header-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--green-dark);
-  background: rgba(46,125,79,0.08);
-  border: 1.5px solid rgba(46,125,79,0.15);
-  padding: 6px 16px;
-  border-radius: 100px;
-}
-.category-header-badge .cat-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--green-dark);
-}
-.category-header-count {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 500;
-}
-
-#grid-all { display: grid; }
-#grid-all.hidden-view { display: none; }
-#grid-categories { display: block; }
-#grid-categories.hidden-view { display: none; }
 
 .product-grid {
   display: grid;
@@ -398,7 +456,7 @@ nav a.nav-highlight:hover {
 }
 .product-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(26,24,20,0.09);
+  box-shadow: 0 20px 50px rgba(228,86,139,0.1), 0 4px 16px rgba(26,24,20,0.06);
 }
 
 .product-card.hidden-card { display: none; }
@@ -408,15 +466,6 @@ nav a.nav-highlight:hover {
 @keyframes card-in {
   from { opacity: 0; transform: translateY(18px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.category-section.hidden-section { display: none; }
-.category-section.visible-section {
-  animation: section-in 0.4s ease both;
-}
-@keyframes section-in {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 .card-img {
@@ -444,9 +493,6 @@ nav a.nav-highlight:hover {
   pointer-events: none;
   z-index: 1;
 }
-.card-badge { z-index: 3; }
-.card-overlay { z-index: 2; }
-.product-card.sold-out .card-img img { filter: grayscale(60%); opacity: 0.8; }
 
 .c-blush    { background: linear-gradient(135deg, #fde8ef 0%, #f5c8d5 100%); }
 .c-sage     { background: linear-gradient(135deg, #e8f2e8 0%, #b8cdb8 100%); }
@@ -469,7 +515,7 @@ nav a.nav-highlight:hover {
   border-radius: 100px;
   border: 1.5px solid rgba(0,0,0,0.1);
 }
-.badge-new     { background: var(--ink); color: var(--cream); }
+.badge-new     { background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light)); color: white; border-color: transparent; }
 .badge-bs      { background: var(--butter); color: var(--ink); border-color: rgba(0,0,0,0.12); }
 .badge-limited { background: var(--peach); color: white; }
 .badge-sold    { background: var(--ink); color: var(--cream); opacity: 0.8; }
@@ -490,20 +536,21 @@ nav a.nav-highlight:hover {
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.25s;
-  background: var(--ink);
-  color: var(--cream);
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white;
   border: none;
   padding: 10px 24px;
   border-radius: 100px;
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(228,86,139,0.35);
 }
 .product-card:hover .quick-btn { opacity: 1; transform: translateY(0); }
-.product-card.sold-out .quick-btn { background: var(--muted); cursor: not-allowed; }
+.product-card.sold-out .quick-btn { background: var(--muted); cursor: not-allowed; box-shadow: none; }
 .product-card.sold-out .card-img { opacity: 0.7; }
 
 .card-body {
@@ -517,7 +564,7 @@ nav a.nav-highlight:hover {
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   margin-bottom: 6px;
 }
 .card-name {
@@ -557,21 +604,21 @@ nav a.nav-highlight:hover {
   text-transform: uppercase;
   padding: 7px 16px;
   border-radius: 100px;
-  border: 1.5px solid var(--border);
-  background: var(--cream);
-  color: var(--ink);
+  border: 1.5px solid var(--blush);
+  background: #FFF5F8;
+  color: var(--figma-pink-dark);
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
   text-decoration: none;
 }
-.card-action:hover { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-.card-action.disabled { color: var(--muted); cursor: not-allowed; background: #f0ede8; }
+.card-action:hover { background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light)); color: white; border-color: transparent; }
+.card-action.disabled { color: var(--muted); cursor: not-allowed; background: #f0ede8; border-color: var(--border); }
 .card-action.disabled:hover { background: #f0ede8; color: var(--muted); border-color: var(--border); }
 
 /* MARQUEE */
 .marquee-wrap {
-  background: var(--green-dark);
+  background: linear-gradient(135deg, var(--figma-pink-dark), #c0446e);
   overflow: hidden;
   padding: 14px 0;
   border-top: 1px solid rgba(0,0,0,0.08);
@@ -589,7 +636,7 @@ nav a.nav-highlight:hover {
   color: rgba(255,255,255,0.9);
   padding: 0 30px;
 }
-.marquee-sep { color: var(--butter); padding: 0 4px; }
+.marquee-sep { color: rgba(255,255,255,0.4); padding: 0 4px; }
 @keyframes mq { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
 /* SHOWCASE */
@@ -663,7 +710,7 @@ nav a.nav-highlight:hover {
   top: -120px; right: -120px;
   width: 480px; height: 480px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(242,165,142,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(228,86,139,0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 .video-section::after {
@@ -688,12 +735,13 @@ nav a.nav-highlight:hover {
   font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   margin-bottom: 18px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+.eyebrow-dot-pink { width: 5px; height: 5px; border-radius: 50%; background: var(--figma-pink-dark); animation: blink 2s ease-in-out infinite; }
 .video-title {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(44px, 5vw, 76px);
@@ -702,7 +750,7 @@ nav a.nav-highlight:hover {
   letter-spacing: -2px;
   margin-bottom: 22px;
 }
-.video-title em { font-style: italic; color: var(--peach); }
+.video-title em { font-style: italic; color: var(--figma-pink-dark); }
 .video-sub {
   font-size: 15px;
   color: var(--muted);
@@ -717,16 +765,16 @@ nav a.nav-highlight:hover {
   letter-spacing: 0.6px;
   padding: 7px 18px;
   border-radius: 100px;
-  border: 1.5px solid var(--border);
-  color: var(--muted);
-  background: var(--offwhite);
+  border: 1.5px solid var(--blush);
+  color: var(--figma-pink-dark);
+  background: #FFF5F8;
 }
 .video-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--ink);
-  color: var(--cream);
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
+  color: white;
   padding: 14px 32px;
   border-radius: 100px;
   font-size: 13px;
@@ -736,12 +784,13 @@ nav a.nav-highlight:hover {
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 6px 20px rgba(228,86,139,0.3);
 }
-.video-cta:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(46,125,79,0.25); }
+.video-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(228,86,139,0.4); }
 .video-cta-arrow {
   width: 20px; height: 20px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.2);
   display: flex; align-items: center; justify-content: center;
   font-size: 11px;
   transition: transform 0.2s;
@@ -782,10 +831,10 @@ nav a.nav-highlight:hover {
   z-index: 5;
   pointer-events: none;
 }
-.video-corner.tl { top: 16px; left: 16px; border-top: 2.5px solid var(--peach); border-left: 2.5px solid var(--peach); border-radius: 5px 0 0 0; }
-.video-corner.tr { top: 16px; right: 16px; border-top: 2.5px solid var(--peach); border-right: 2.5px solid var(--peach); border-radius: 0 5px 0 0; }
-.video-corner.bl { bottom: 52px; left: 16px; border-bottom: 2.5px solid var(--peach); border-left: 2.5px solid var(--peach); border-radius: 0 0 0 5px; }
-.video-corner.br { bottom: 52px; right: 16px; border-bottom: 2.5px solid var(--peach); border-right: 2.5px solid var(--peach); border-radius: 0 0 5px 0; }
+.video-corner.tl { top: 16px; left: 16px; border-top: 2.5px solid var(--figma-pink-light); border-left: 2.5px solid var(--figma-pink-light); border-radius: 5px 0 0 0; }
+.video-corner.tr { top: 16px; right: 16px; border-top: 2.5px solid var(--figma-pink-light); border-right: 2.5px solid var(--figma-pink-light); border-radius: 0 5px 0 0; }
+.video-corner.bl { bottom: 52px; left: 16px; border-bottom: 2.5px solid var(--figma-pink-light); border-left: 2.5px solid var(--figma-pink-light); border-radius: 0 0 0 5px; }
+.video-corner.br { bottom: 52px; right: 16px; border-bottom: 2.5px solid var(--figma-pink-light); border-right: 2.5px solid var(--figma-pink-light); border-radius: 0 0 5px 0; }
 .video-overlay {
   position: absolute; inset: 0;
   background: rgba(26,24,20,0.42);
@@ -799,14 +848,14 @@ nav a.nav-highlight:hover {
   content: '';
   position: absolute; inset: -8px;
   border-radius: 50%;
-  border: 1.5px solid rgba(242,165,142,0.4);
+  border: 1.5px solid rgba(228,86,139,0.4);
   animation: ring-pulse 2s ease-in-out infinite;
 }
 @keyframes ring-pulse { 0%,100%{transform:scale(1);opacity:0.6} 50%{transform:scale(1.15);opacity:0.2} }
 .play-btn {
   width: 76px; height: 76px;
   border-radius: 50%;
-  background: var(--peach);
+  background: linear-gradient(135deg, var(--figma-pink-dark), var(--figma-pink-light));
   border: none;
   color: white;
   display: flex; align-items: center; justify-content: center;
@@ -814,7 +863,7 @@ nav a.nav-highlight:hover {
   transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
   position: relative; z-index: 1;
 }
-.play-btn:hover { transform: scale(1.1); box-shadow: 0 0 0 14px rgba(242,165,142,0.18); }
+.play-btn:hover { transform: scale(1.1); box-shadow: 0 0 0 14px rgba(228,86,139,0.18); }
 .play-label { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 .video-controls {
   position: absolute; bottom: 0; left: 0; right: 0;
@@ -836,13 +885,13 @@ nav a.nav-highlight:hover {
 .vc-time { font-size: 11px; color: rgba(255,255,255,0.65); font-weight: 500; min-width: 72px; letter-spacing: 0.3px; flex-shrink: 0; }
 .vc-progress-wrap { flex: 1; cursor: pointer; padding: 8px 0; position: relative; }
 .vc-progress-bar { height: 3px; background: rgba(255,255,255,0.22); border-radius: 100px; overflow: visible; position: relative; }
-.vc-progress-fill { height: 100%; background: var(--peach); border-radius: 100px; width: 0%; transition: width 0.25s linear; position: relative; }
+.vc-progress-fill { height: 100%; background: linear-gradient(90deg, var(--figma-pink-dark), var(--figma-pink-light)); border-radius: 100px; width: 0%; transition: width 0.25s linear; position: relative; }
 .vc-progress-fill::after {
   content: '';
   position: absolute; right: -5px; top: 50%;
   transform: translateY(-50%);
   width: 10px; height: 10px;
-  border-radius: 50%; background: var(--peach); opacity: 0; transition: opacity 0.2s;
+  border-radius: 50%; background: var(--figma-pink-light); opacity: 0; transition: opacity 0.2s;
 }
 .vc-progress-wrap:hover .vc-progress-fill::after { opacity: 1; }
 .video-live-badge {
@@ -856,7 +905,7 @@ nav a.nav-highlight:hover {
   z-index: 5; display: none; align-items: center; gap: 7px;
 }
 .video-live-badge.show { display: flex; }
-.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--peach); animation: pulse 1.6s ease-in-out infinite; }
+.live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--figma-pink-light); animation: blink 1.6s ease-in-out infinite; }
 
 /* ABOUT SECTION */
 .about-section {
@@ -907,24 +956,19 @@ nav a.nav-highlight:hover {
   border: 1px solid var(--border);
 }
 .about-photo-wide img { width: 100%; height: 100%; object-fit: cover; }
-.photo-emoji {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 48px;
-}
 .about-text { padding: 8px 0; }
 .about-label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.about-label::before { content: ''; width: 20px; height: 1.5px; background: var(--green-dark); }
+.about-label::before { content: ''; width: 20px; height: 1.5px; background: var(--figma-pink-dark); }
 .about-title {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(36px, 3.5vw, 52px);
@@ -944,11 +988,10 @@ nav a.nav-highlight:hover {
   font-family: 'DM Sans', sans-serif;
 }
 .about-body { font-size: 14px; color: rgba(26,24,20,0.65); line-height: 1.85; margin-bottom: 18px; }
-.about-body + .about-body { margin-top: 0; }
 .about-sign {
   font-family: 'Caveat', cursive;
   font-size: 19px;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   margin-top: 28px;
   line-height: 1.5;
   font-weight: 600;
@@ -1044,15 +1087,11 @@ nav a.nav-highlight:hover {
 .si-btn:nth-child(1) { animation-delay: 0s; }
 .si-btn:nth-child(2) { animation-delay: 0.5s; }
 .si-btn:nth-child(3) { animation-delay: 1s; }
-.si-btn:nth-child(4) { animation-delay: 1.5s; }
-.si-btn:nth-child(5) { animation-delay: 2s; }
 @keyframes si-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 .si-btn:hover { animation: none; transform: scale(1.2) translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
 .si-ig   { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .si-wa   { background: #25D366; }
-.si-yt   { background: #FF0000; }
 .si-tt   { background: #010101; }
-.si-li   { background: #0077B5; }
 .si-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 .about-footer-bar {
   margin-top: 80px;
@@ -1073,24 +1112,22 @@ nav a.nav-highlight:hover {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(46,125,79,0.08);
-  border: 1px solid rgba(46,125,79,0.15);
+  background: rgba(228,86,139,0.07);
+  border: 1px solid rgba(228,86,139,0.18);
   padding: 7px 16px;
   border-radius: 100px;
   font-size: 11px;
-  color: var(--green-dark);
+  color: var(--figma-pink-dark);
   font-weight: 600;
 }
 .status-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--green-dark);
-  animation: pulse 2s ease-in-out infinite;
+  background: var(--figma-pink-dark);
+  animation: blink 2s ease-in-out infinite;
 }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
 /* RESPONSIVE */
-@media (max-width: 1100px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px) {
   header { padding: 0 24px; height: 68px; }
   nav { display: none; }
@@ -1098,7 +1135,7 @@ nav a.nav-highlight:hover {
   .shop-hero { padding: 50px 28px 40px; flex-direction: column; align-items: flex-start; gap: 24px; }
   .shop-hero-right { text-align: left; }
   .shop-desc { text-align: left; }
-  .shop-stats { justify-content: flex-start; }
+  .shop-tags { justify-content: flex-start; }
   .filter-bar { padding: 20px 28px; }
   .shop-section { padding: 40px 28px 60px; }
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -1117,7 +1154,6 @@ nav a.nav-highlight:hover {
   .product-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
-/* ANIMATIONS */
 .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 </style>
@@ -1131,20 +1167,20 @@ nav a.nav-highlight:hover {
     <span class="marquee-top-item"><span class="dot"></span> Custom merch open for order</span>
     <span class="marquee-top-item"><span class="dot"></span> Tote bag · Hoodie · Tumbler · Sticker</span>
     <span class="marquee-top-item"><span class="dot"></span> WhatsApp us to start yours</span>
-    <span class="marquee-top-item"><span class="dot"></span> Handmade with love ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> Handmade with love</span>
     <span class="marquee-top-item"><span class="dot"></span> PERIODT</span>
     <span class="marquee-top-item"><span class="dot"></span> Custom merch open for order</span>
     <span class="marquee-top-item"><span class="dot"></span> Tote bag · Hoodie · Tumbler · Sticker</span>
     <span class="marquee-top-item"><span class="dot"></span> WhatsApp us to start yours</span>
-    <span class="marquee-top-item"><span class="dot"></span> Handmade with love ✿</span>
+    <span class="marquee-top-item"><span class="dot"></span> Handmade with love</span>
   </div>
 </div>
 
 <!-- HEADER -->
 <header>
   <a href="index.html" class="header-logo">
-  <img src="assets/logo design.png" alt="design" class="logo-mark">
-</a>
+    <img src="assets/logo design.png" alt="PERIODT" class="logo-mark">
+  </a>
   <nav>
     <a href="#products">Shop</a>
     <a href="personal-work.html">Custom</a>
@@ -1153,26 +1189,38 @@ nav a.nav-highlight:hover {
     <a href="#video" class="nav-highlight">Our Journey</a>
   </nav>
   <div class="header-right">
-    <a class="hbtn" href="#">🇮🇩 IDR</a>
-    <a class="hbtn" href="#">👤</a>
-    <div class="cart-icon">🛍️ <span class="cart-count">2</span></div>
+    <a class="hbtn" href="#">IDR</a>
+    <a class="hbtn" href="#">Account</a>
+    <div class="cart-icon">Cart <span class="cart-count">2</span></div>
   </div>
 </header>
+<div class="header-divider"></div>
 
 <!-- SHOP HERO -->
 <section class="shop-hero">
-  <div class="shop-hero-left fade-up">
+  <div class="shop-hero-left fade-up" style="position:relative;z-index:1;">
     <p class="shop-eyebrow"><span class="eyebrow-dot"></span> Handmade · Jakarta · Made to Order</p>
     <div class="shop-title">
       <div class="shop-title-text">PERIODT</div>
     </div>
+    <div class="shop-hero-actions">
+      <a href="#products" class="hero-btn-p">Shop Now</a>
+      <a href="personal-work.html" class="hero-btn-s">Customize Yours</a>
+    </div>
+    <div class="shop-hero-sign">crafted with love, just for you ~</div>
   </div>
   <div class="shop-hero-right fade-up" style="transition-delay:0.12s">
     <p class="shop-desc">Custom merchandise, printed accessories & handmade goods. Each piece crafted with care, designed to carry your vibe everywhere you go.</p>
-    <div class="shop-stats">
-      <div class="stat"><span class="stat-n">500</span><span class="stat-l">Items Sold</span></div>
-      <div class="stat"><span class="stat-n">100</span><span class="stat-l">Customers</span></div>
-      <div class="stat"><span class="stat-n"> 5 </span><span class="stat-l">Avg Rating</span></div>
+    <div class="shop-tags">
+      <span class="shop-tag">Tote Bag</span>
+      <span class="shop-tag">Tumbler</span>
+      <span class="shop-tag">Sticker</span>
+      <span class="shop-tag">Keychain</span>
+      <span class="shop-tag">PIN</span>
+    </div>
+    <div class="shop-open">
+      <span class="shop-open-dot"></span>
+      Open for orders
     </div>
   </div>
 </section>
@@ -1200,7 +1248,7 @@ nav a.nav-highlight:hover {
 
 <!-- PRODUCT GRID -->
 <section class="shop-section" id="products">
-  <p class="grid-label" id="gridLabel">8 products</p>
+  <p class="grid-label" id="gridLabel">6 products</p>
 
   <div id="grid-all" class="product-grid">
 
@@ -1208,7 +1256,7 @@ nav a.nav-highlight:hover {
       <div class="card-img c-blush" style="display:flex;align-items:center;justify-content:center;">
         <span class="card-badge badge-new">New</span>
         <img src="assets/TOTE.png" alt="Totebag">
-        <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
+        <div class="card-overlay"><button class="quick-btn">Quick Order &rarr;</button></div>
       </div>
       <div class="card-body">
         <p class="card-cat">Tote Bag</p>
@@ -1216,7 +1264,7 @@ nav a.nav-highlight:hover {
         <p class="card-desc">A premium canvas tote bag in a beautiful brown color. Durable, stylish, and eco-friendly. Perfect for daily use.</p>
         <div class="card-footer">
           <span class="card-price">Rp 30.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
+          <a href="https://wa.me/6281292526073" class="card-action">Order</a>
         </div>
       </div>
     </div>
@@ -1225,7 +1273,7 @@ nav a.nav-highlight:hover {
       <div class="card-img c-sage" style="display:flex;align-items:center;justify-content:center;">
         <span class="card-badge badge-bs">Bestseller</span>
         <img src="assets/STIKER.png" alt="Custom Stickers">
-        <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
+        <div class="card-overlay"><button class="quick-btn">Quick Order &rarr;</button></div>
       </div>
       <div class="card-body">
         <p class="card-cat">Stickers</p>
@@ -1233,7 +1281,7 @@ nav a.nav-highlight:hover {
         <p class="card-desc">Custom stickers made just for you! High-quality print, vibrant colors, and durable material. Waterproof, long-lasting, and fully customizable.</p>
         <div class="card-footer">
           <span class="card-price">Rp 10.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
+          <a href="https://wa.me/6281292526073" class="card-action">Order</a>
         </div>
       </div>
     </div>
@@ -1241,7 +1289,7 @@ nav a.nav-highlight:hover {
     <div class="product-card fade-up" data-category="tumbler" style="transition-delay:0.12s">
       <div class="card-img c-sky" style="display:flex;align-items:center;justify-content:center;">
         <img src="assets/TUMBLER.png" alt="Tumbler">
-        <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
+        <div class="card-overlay"><button class="quick-btn">Quick Order &rarr;</button></div>
       </div>
       <div class="card-body">
         <p class="card-cat">Tumbler</p>
@@ -1249,7 +1297,7 @@ nav a.nav-highlight:hover {
         <p class="card-desc">Premium custom tumbler designed for your daily needs. Made with high-quality materials, durable, and easy to carry.</p>
         <div class="card-footer">
           <span class="card-price">Rp 100.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
+          <a href="https://wa.me/6281292526073" class="card-action">Order</a>
         </div>
       </div>
     </div>
@@ -1274,15 +1322,15 @@ nav a.nav-highlight:hover {
     <div class="product-card fade-up" data-category="pin">
       <div class="card-img c-butter" style="display:flex;align-items:center;justify-content:center;">
         <img src="assets/PIN.png" alt="PIN">
-        <div class="card-overlay"><button class="quick-btn">Quick Order →</button></div>
+        <div class="card-overlay"><button class="quick-btn">Quick Order &rarr;</button></div>
       </div>
       <div class="card-body">
         <p class="card-cat">PIN</p>
         <h3 class="card-name">PIN</h3>
-        <p class="card-desc">Designed with premium quality materials and eye catching details, these pins are perfect for bags, jackets, pouches, or everyday accessories. Small in size but full of personality, each pin adds a unique touch to your look and makes every outfit stand out. Perfect for collecting, gifting, or showing off your favorite aesthetic.</p>
+        <p class="card-desc">Designed with premium quality materials and eye catching details, these pins are perfect for bags, jackets, pouches, or everyday accessories.</p>
         <div class="card-footer">
           <span class="card-price">Rp 10.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Order </a>
+          <a href="https://wa.me/6281292526073" class="card-action">Order</a>
         </div>
       </div>
     </div>
@@ -1290,7 +1338,7 @@ nav a.nav-highlight:hover {
     <div class="product-card fade-up" data-category="custom" style="transition-delay:0.06s">
       <div class="card-img c-peach" style="display:flex;align-items:center;justify-content:center;">
         <img src="assets/T-SHIRT.png" alt="T-Shirt">
-        <div class="card-overlay"><button class="quick-btn">Start Custom →</button></div>
+        <div class="card-overlay"><button class="quick-btn">Start Custom &rarr;</button></div>
       </div>
       <div class="card-body">
         <p class="card-cat">T-Shirt</p>
@@ -1298,14 +1346,14 @@ nav a.nav-highlight:hover {
         <p class="card-desc">Premium custom t-shirt made with high quality fabric. Designed with durable prints and a modern fit, perfect for everyday style.</p>
         <div class="card-footer">
           <span class="card-price">Rp 35.000</span>
-          <a href="https://wa.me/6281292526073" class="card-action"> Customize </a>
+          <a href="https://wa.me/6281292526073" class="card-action">Customize</a>
         </div>
       </div>
     </div>
 
   </div>
 
-  <div id="grid-categories" class="hidden-view"></div>
+  <div id="grid-categories" style="display:none;"></div>
 
 </section>
 
@@ -1356,9 +1404,9 @@ nav a.nav-highlight:hover {
 <section class="video-section" id="video">
   <div class="video-section-inner">
     <div class="video-left fade-up">
-      <p class="video-eyebrow"><span class="eyebrow-dot"></span> Behind the Merch</p>
+      <p class="video-eyebrow"><span class="eyebrow-dot-pink"></span> Behind the Merch</p>
       <h2 class="video-title">Watch the<br><em>process</em> unfold.</h2>
-      <p class="video-sub">Watch your ideas come to life. Discover custom merchandise that blends style and function, adds a personal touch, and stands out wherever you go. Your perfect collection starts here.</p>
+      <p class="video-sub">Watch your ideas come to life. Discover custom merchandise that blends style and function, adds a personal touch, and stands out wherever you go.</p>
       <div class="video-tags">
         <span class="vtag">✦ Making Of</span>
         <span class="vtag">✦ Unboxing</span>
@@ -1366,7 +1414,7 @@ nav a.nav-highlight:hover {
       </div>
       <a href="https://wa.me/6281292526073" class="video-cta" target="_blank">
         Order your merch
-        <span class="video-cta-arrow">→</span>
+        <span class="video-cta-arrow">&rarr;</span>
       </a>
     </div>
     <div class="video-right fade-up" style="transition-delay:0.14s">
@@ -1441,8 +1489,8 @@ nav a.nav-highlight:hover {
   <div style="padding-top:36px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; max-width:1300px; margin:0 auto;">
     <img src="assets/logoo.png" alt="periodt" style="height:220px; width:auto; object-fit:contain;">
     <span style="font-size:12px; color:var(--muted);">© 2026 PERIODT · Handmade merchandise dari Jakarta · Made with love</span>
-    <div style="display:inline-flex; align-items:center; gap:7px; background:rgba(46,125,79,0.08); border:1px solid rgba(46,125,79,0.15); padding:7px 16px; border-radius:100px; font-size:11px; color:var(--green-dark); font-weight:600;">
-      <span style="width:6px; height:6px; border-radius:50%; background:var(--green-dark); animation:pulse 2s ease-in-out infinite; display:inline-block;"></span>
+    <div style="display:inline-flex; align-items:center; gap:7px; background:rgba(228,86,139,0.07); border:1px solid rgba(228,86,139,0.18); padding:7px 16px; border-radius:100px; font-size:11px; color:var(--figma-pink-dark); font-weight:600;">
+      <span style="width:6px; height:6px; border-radius:50%; background:var(--figma-pink-dark); animation:blink 2s ease-in-out infinite; display:inline-block;"></span>
       Open for orders
     </div>
   </div>
@@ -1450,11 +1498,9 @@ nav a.nav-highlight:hover {
 </footer>
 
 <script>
-// CATEGORY FILTER
 (function () {
   const pills           = document.querySelectorAll('.pill[data-filter]');
   const gridAll         = document.getElementById('grid-all');
-  const gridCats        = document.getElementById('grid-categories');
   const gridLabel       = document.getElementById('gridLabel');
   const productsSection = document.getElementById('products');
   const filterBar       = document.getElementById('filterBar');
@@ -1467,18 +1513,16 @@ nav a.nav-highlight:hover {
   }
 
   function showAll() {
-  gridAll.classList.remove('hidden-view');
-  if (gridCats) gridCats.classList.add('hidden-view');
-  const cards = gridAll.querySelectorAll('.product-card');
-  cards.forEach((card, i) => {
-    card.style.display = '';
-    card.style.animationDelay = (i * 0.06) + 's';
-    card.classList.remove('filtered-in');
-    void card.offsetWidth;
-    card.classList.add('filtered-in');
-  });
-  gridLabel.textContent = cards.length + ' products';
-}
+    const cards = gridAll.querySelectorAll('.product-card');
+    cards.forEach((card, i) => {
+      card.style.display = '';
+      card.style.animationDelay = (i * 0.06) + 's';
+      card.classList.remove('filtered-in');
+      void card.offsetWidth;
+      card.classList.add('filtered-in');
+    });
+    gridLabel.textContent = cards.length + ' products';
+  }
 
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
@@ -1487,16 +1531,11 @@ nav a.nav-highlight:hover {
       const f = pill.getAttribute('data-filter');
       if (f === 'all') {
         showAll();
-        const rect = productsSection.getBoundingClientRect();
-        if (rect.top < -80 || rect.top > window.innerHeight) scrollToProducts();
       } else {
-        gridAll.classList.remove('hidden-view');
-        if (gridCats) gridCats.classList.add('hidden-view');
         const cards = gridAll.querySelectorAll('.product-card');
         let count = 0;
         cards.forEach((card) => {
-          const cat = card.getAttribute('data-category');
-          if (cat === f) {
+          if (card.getAttribute('data-category') === f) {
             card.style.display = '';
             card.style.animationDelay = (count * 0.07) + 's';
             card.classList.remove('filtered-in');
@@ -1516,13 +1555,11 @@ nav a.nav-highlight:hover {
   showAll();
 })();
 
-// SCROLL REVEAL
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// VIDEO PLAYER
 (function(){
   const video       = document.getElementById('shopVideo');
   const overlay     = document.getElementById('videoOverlay');
@@ -1573,7 +1610,6 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   });
 })();
 
-// CUSTOM HEART CURSOR
 (function(){
   const cursor = document.createElement('div');
   cursor.id = 'custom-cursor';
