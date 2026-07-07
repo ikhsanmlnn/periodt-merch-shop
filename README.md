@@ -7,14 +7,14 @@ Website untuk **PERIODT**, brand merchandise custom handmade asal Jakarta (tote 
 | File | Fungsi |
 |---|---|
 | `index.html` | Halaman utama / toko — katalog produk, filter kategori, video behind-the-scenes, dan bagian about |
-| `personal-work.html` | Galeri portofolio — koleksi hasil kerja, carousel "archives", dan bagian about |
+| `personal-work.html` | Galeri portofolio dan koleksi hasil kerja, carousel "archives", dan bagian about |
 
 ## Fitur Utama
 
 **index.html (Toko)**
 - Marquee berjalan di atas (pengumuman promo)
 - Hero section dengan judul brand & CTA (Shop Now / Customize Yours)
-- Filter kategori produk (All, Tote Bag, Tumbler, Sticker, Keychain, PIN, Custom) — filtering dilakukan dengan JavaScript, tanpa reload halaman
+- Filter kategori produk (All, Tote Bag, Tumbler, Sticker, Keychain, PIN, Custom) filtering dilakukan dengan JavaScript, tanpa reload halaman
 - Grid produk dengan badge (New, Bestseller, Sold Out), harga, dan tombol order langsung ke WhatsApp
 - Showcase carousel hasil kerja (auto-scroll)
 - Video section dengan player custom (play/pause, mute, progress bar)
@@ -32,7 +32,7 @@ Website untuk **PERIODT**, brand merchandise custom handmade asal Jakarta (tote 
 
 - **HTML5 + CSS3** murni (tanpa framework)
 - **Vanilla JavaScript** untuk semua interaktivitas (filter, carousel, video player, parallax, animasi scroll)
-- Font: Google Fonts — `Instrument Serif`, `DM Sans`, `Caveat`, `Playfair Display`
+- Font: Google Fonts `Instrument Serif`, `DM Sans`, `Caveat`, `Playfair Display`
 - Font custom: `Socafe` (di-load dari folder `assets/`)
 
 ## Kebutuhan Folder `assets/`
@@ -49,7 +49,7 @@ Jika ada gambar yang hilang, beberapa elemen (foto About) punya fallback emoji l
 
 ## Kontak Order
 
-Semua tombol "Order" mengarah ke WhatsApp: `https://wa.me/6281292526073`
+Semua tombol "Order" mengarah ke WhatsApp
 
 ## Responsif
 
@@ -57,6 +57,6 @@ Sudah ada media query untuk breakpoint `900px` dan `520px` (tablet & mobile) —
 
 ## Catatan Pengembangan
 
-- Belum ada backend/database — semua data produk dan galeri masih hardcode di HTML
+- Belum ada backend/database karena semua data produk dan galeri masih hardcode di HTML
 - Filter produk & carousel hanya jalan dengan JavaScript aktif (tidak ada fallback no-JS)
-- Custom cursor menyembunyikan cursor asli browser (`cursor: none !important`) — pastikan ini disengaja untuk semua perangkat
+- Custom cursor menyembunyikan cursor asli browser (`cursor: none !important`) pastikan ini disengaja untuk semua perangkat
